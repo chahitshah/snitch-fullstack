@@ -38,9 +38,12 @@ a {
 
 .auth-page {
   display: grid;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   place-items: center;
-  padding: 48px 20px;
+  padding: 20px;
   background:
     radial-gradient(ellipse at 12% 18%, rgb(218 226 211 / 54%), transparent 32%),
     radial-gradient(ellipse at 91% 86%, rgb(232 222 205 / 46%), transparent 30%),
@@ -54,6 +57,131 @@ a {
   border-radius: 20px;
   background: rgb(255 255 253 / 94%);
   box-shadow: 0 24px 70px rgb(34 43 34 / 8%);
+}
+
+.login-card {
+  max-width: 420px;
+  padding: 24px 32px 20px;
+}
+
+.login-card .brand {
+  font-size: 17px;
+}
+
+.login-card .brand-mark {
+  width: 26px;
+  height: 26px;
+  font-size: 19px;
+}
+
+.login-card .auth-heading {
+  margin: 18px 0 18px;
+}
+
+.login-card .auth-heading h1 {
+  font-size: 28px;
+}
+
+.login-card .auth-description {
+  margin-top: 5px;
+}
+
+.login-card .auth-form {
+  gap: 12px;
+}
+
+.login-card .field {
+  gap: 5px;
+}
+
+.login-card .field input {
+  height: 42px;
+}
+
+.login-card .submit-button {
+  min-height: 43px;
+}
+
+.login-card .auth-divider {
+  margin: 10px 0;
+}
+
+.login-card .auth-switch {
+  margin-top: 14px;
+}
+
+.register-card {
+  max-width: 430px;
+  padding: 18px 30px 16px;
+}
+
+.register-card .brand {
+  font-size: 17px;
+}
+
+.register-card .brand-mark {
+  width: 26px;
+  height: 26px;
+  font-size: 19px;
+}
+
+.register-card .auth-heading {
+  margin: 12px 0;
+}
+
+.register-card .eyebrow {
+  margin-bottom: 5px;
+}
+
+.register-card .auth-heading h1 {
+  font-size: 26px;
+}
+
+.register-card .auth-description {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.register-card .auth-form {
+  gap: 8px;
+}
+
+.register-card .field {
+  gap: 4px;
+  font-size: 11px;
+}
+
+.register-card .field input {
+  height: 38px;
+}
+
+.register-card .account-type {
+  gap: 8px;
+}
+
+.register-card .account-type legend {
+  margin-bottom: 4px;
+}
+
+.register-card .choice {
+  min-height: 34px;
+}
+
+.register-card .submit-button {
+  min-height: 40px;
+  margin-top: 0;
+}
+
+.register-card .auth-divider {
+  margin: 7px 0;
+}
+
+.register-card .google-button {
+  min-height: 40px;
+}
+
+.register-card .auth-switch {
+  margin-top: 8px;
 }
 
 .brand {
@@ -219,6 +347,50 @@ a {
   opacity: 0.7;
 }
 
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 17px 0;
+  color: #969b93;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e7e9e3;
+}
+
+.google-button {
+  min-height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  text-decoration: none;
+}
+
+.google-button img {
+  width: 180px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.google-button:hover {
+  transform: translateY(-1px);
+}
+
+.google-button:focus-visible {
+  outline: 3px solid rgb(75 112 83 / 35%);
+  outline-offset: 3px;
+}
+
 .auth-switch {
   margin: 23px 0 0;
   color: #777b74;
@@ -255,13 +427,9 @@ a {
   color: #36583c;
 }
 
-.login-card .auth-form {
-  gap: 19px;
-}
-
 @media (max-width: 520px) {
   .auth-page {
-    padding: 22px 14px;
+    padding: 14px;
   }
 
   .auth-card {
@@ -269,7 +437,99 @@ a {
     border-radius: 16px;
   }
 
+  .login-card {
+    max-width: 420px;
+    padding: 14px 20px 12px;
+  }
+
+  .login-card .auth-heading {
+    margin: 12px 0;
+  }
+
+  .login-card .auth-heading h1 {
+    font-size: 25px;
+  }
+
+  .login-card .auth-form {
+    gap: 9px;
+  }
+
+  .login-card .field input {
+    height: 39px;
+  }
+
+  .login-card .auth-divider {
+    margin: 7px 0;
+  }
+
+  .login-card .google-button {
+    min-height: 40px;
+  }
+
+  .login-card .auth-switch {
+    margin-top: 9px;
+  }
+
+  .register-card {
+    padding: 12px 18px 10px;
+  }
+
+  .register-card .auth-heading {
+    margin: 8px 0;
+  }
+
+  .register-card .auth-heading h1 {
+    font-size: 24px;
+  }
+
+  .register-card .auth-form {
+    gap: 6px;
+  }
+
+  .register-card .field input {
+    height: 36px;
+  }
+
+  .register-card .choice {
+    min-height: 31px;
+  }
+
+  .register-card .auth-switch {
+    margin-top: 5px;
+  }
+
   .auth-heading {
     margin-top: 31px;
+  }
+}
+
+@media (max-height: 700px) {
+  .register-card {
+    padding-top: 9px;
+    padding-bottom: 8px;
+  }
+
+  .register-card .auth-heading {
+    margin: 6px 0;
+  }
+
+  .register-card .auth-form {
+    gap: 5px;
+  }
+
+  .register-card .field input {
+    height: 34px;
+  }
+
+  .register-card .choice {
+    min-height: 29px;
+  }
+
+  .register-card .auth-divider {
+    margin: 4px 0;
+  }
+
+  .register-card .auth-switch {
+    margin-top: 4px;
   }
 }

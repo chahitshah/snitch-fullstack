@@ -90,3 +90,42 @@ export const loginuser = async(req,res)=>{
         return res.status(500).json({message:"Internal server error "})
     }
 }
+
+export const googleCallback = async(req,res)=>{
+    try {
+        const { id, displayName, emails } = req.user
+        const email = emails?.[0]?.value
+
+        if (!email) {
+            return res.redirect("http://localhost:5173/login?error=google_email_missing")
+        }
+
+        let isuserexist = await userModel.findOne({ email })
+
+        if (!isuserexist) {
+            isuserexist = await userModel.create({
+                email,
+                googleId: id,
+                fullname: displayName
+            })
+        } else if (!isuserexist.googleId) {
+            isuserexist.googleId = id
+            await isuserexist.save()
+        }
+
+        const token = jwt.sign({
+            id: isuserexist._id
+        }, config.jwtSecret, { expiresIn: '7d' })
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        })
+
+        return res.redirect("http://localhost:5173/welcome")
+    } catch (error) {
+        console.error("Google OAuth callback failed:", error)
+        return res.redirect("http://localhost:5173/login?error=google_auth_failed")
+    }
+}

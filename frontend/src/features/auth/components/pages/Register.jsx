@@ -27,7 +27,7 @@ export default function Register() {
 
     try {
       await handleRegister(form);
-      navigate("/login", { state: { registered: true } });
+      navigate("/welcome", { replace: true });
     } catch (requestError) {
       const responseData = requestError.response?.data;
       setError(
@@ -42,7 +42,7 @@ export default function Register() {
 
   return (
     <main className="auth-page">
-      <section className="auth-card" aria-labelledby="register-title">
+      <section className="auth-card register-card" aria-labelledby="register-title">
         <Link className="brand" to="/" aria-label="Snitch home">
           <span className="brand-mark" aria-hidden="true">s</span>
           <span>snitch</span>
@@ -137,6 +137,14 @@ export default function Register() {
             {isSubmitting ? "Creating account…" : "Create account"}
           </button>
         </form>
+
+        <div className="auth-divider" aria-hidden="true"><span>or</span></div>
+        <a className="google-button" href="/api/auth/google">
+          <img
+            alt="Sign in with Google"
+            src="/google-assets/Android%20+%20Web/PNG%20@1x/Light/Theme=Light,%20Show%20text=Yes,%20Shape=Square,%20Platform=Android+Web.png"
+          />
+        </a>
 
         <p className="auth-switch">
           Already have an account? <Link to="/login">Sign in</Link>

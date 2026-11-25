@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hook/useAuth.js";
 
 export default function Login() {
   const { handleLogin } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(false);
 
   async function submitLogin(event) {
     event.preventDefault();
@@ -23,7 +23,7 @@ export default function Login() {
 
     try {
       await handleLogin(credentials);
-      setIsSignedIn(true);
+      navigate("/welcome", { replace: true });
     } catch (requestError) {
       const responseData = requestError.response?.data;
       setError(
@@ -82,16 +82,18 @@ export default function Login() {
           </label>
 
           {error && <p className="form-message form-error" role="alert">{error}</p>}
-          {isSignedIn && (
-            <p className="form-message form-success" role="status">
-              You’re signed in.
-            </p>
-          )}
-
           <button className="submit-button" disabled={isSubmitting} type="submit">
-            {isSubmitting ? "Signing in…" : isSignedIn ? "Signed in" : "Sign in"}
+            {isSubmitting ? "Signing in…" : "Sign in"}
           </button>
         </form>
+
+        <div className="auth-divider" aria-hidden="true"><span>or</span></div>
+        <a className="google-button" href="/api/auth/google">
+          <img
+            alt="Sign in with Google"
+            src="/google-assets/Android%20+%20Web/PNG%20@1x/Light/Theme=Light,%20Show%20text=Yes,%20Shape=Square,%20Platform=Android+Web.png"
+          />
+        </a>
 
         <p className="auth-switch">
           New to Snitch? <Link to="/register">Create an account</Link>
