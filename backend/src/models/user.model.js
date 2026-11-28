@@ -1,5 +1,5 @@
 import mongoose from "mongoose"
-import {config} from "../config/config.js"
+
 import bycrypt from "bcryptjs"
 
 const userSchema = new mongoose.Schema({

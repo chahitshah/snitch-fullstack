@@ -27,9 +27,9 @@ export const loginUserRules = [
 
   // Validate contact only if it is provided
   body("contact")
-    .optional()
-    .notEmpty()
-    .withMessage("Contact cannot be empty"),
+    .optional({ values: "falsy" })
+    .isMobilePhone("en-IN")
+    .withMessage("Please enter a valid contact number"),
 
   // Ensure at least one of email or contact is sent
   body().custom((value, { req }) => {

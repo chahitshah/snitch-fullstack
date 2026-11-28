@@ -2,6 +2,7 @@ import express from "express"
 import morgan from "morgan"
 import cookieParser from "cookie-parser"
 import authRoutes from "./routes/auth.routes.js";
+import productRoutes from "./routes/product.routes.js"
 import cors from "cors";
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
@@ -14,7 +15,7 @@ app.use(cookieParser())
 app.use(passport.initialize());
 
 passport.use(new GoogleStrategy({
-  clientID: congif.GOOGLE_CLIENT_ID,
+  clientID: config.GOOGLE_CLIENT_ID,
   clientSecret: config.GOOGLE_CLIENT_SECRET,
   callbackURL: '/api/auth/google/callback',
 }, (accessToken, refreshToken, profile, done) => {
@@ -33,6 +34,6 @@ app.use(
 );
 
 app.use("/api/auth",authRoutes)
-
+app.use("/api",productRoutes)
 
 export default app
